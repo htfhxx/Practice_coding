@@ -47,3 +47,26 @@
     }
 
 //素数筛
+const int maxn = 10000;
+int mark[maxn];  //标记
+int prime[maxn];  //存储
+int primeth=0;
+for(int i = 0; i <= maxn; i++)
+        mark[i] = 0;
+for(int i = 2; i <= maxn; i++){
+    if(mark==1) continue;  //跳过
+    prime[primeth++]=i;
+    for(int j=i*i;j<maxn;j++)  //剪枝
+        mark[j]=1;
+}
+
+
+
+
+
+
+
+
+
+
+
