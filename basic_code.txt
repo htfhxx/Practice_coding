@@ -114,9 +114,25 @@ int main(){
 //Hash的应用
 n个整数取前m大
 
+//活用scanf 和 cin -----scanf读取整数不消耗回车，cin>>会消耗掉回车
+//gets(char s[999])   getline(cin,string s) 读取整行
+double a[10000];
+double num;
+scanf("%lf",&num);
+a[0]=0;
+a[1]=num;
+int cnt=2;
 
-
-
+char c;
+while(scanf("%c",&c)!=EOF && c!='\n'){
+	scanf("%lf",&num);
+	if(c=='+')a[cnt++]=num;
+	else if(c=='-')a[cnt++]=-num;
+	else if(c=='*')a[cnt-1]*=num;
+	else if(c=='/')a[cnt-1]/=num;
+}
+for(int i=1;i<cnt;i++)a[0]+=a[i];
+printf("%.0lf\n",a[0]);
 
 
 
