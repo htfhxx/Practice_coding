@@ -5,6 +5,7 @@
 //优先级队列   相当于一个自动排序的栈  属于<queue>
 //哈夫曼树的带全路径和即为：所有中间节点的权值和
 priority_queue<int,vector<int>,greater<int> > Q;
+			//T    Container     Compare
 int n;
 while(cin>>n){
 	for(int i=0;i<n;i++){
@@ -24,3 +25,52 @@ while(cin>>n){
 	}
 	cout<<result<<endl;
 }
+
+
+//二叉树--通过前序中序遍历得到后序遍历
+
+struct Node{
+    Node *left;
+    Node *right;
+    char c;
+    Node(){   left=NULL; right=NULL;  }
+}Tree[50];                              //静态内存分配数组
+int loc;
+
+Node *create_node(int s1,int e1,int s2,int e2){
+    Node *node=  &Tree[loc++];;         //返回指针！！！！--->&
+    node->c=pre[s1];
+
+    int midchar;
+    for(int i=s2;i<=e2;i++){
+        if(mid[i]==pre[s1]){
+            midchar=i;
+            break;
+        }
+    }
+	
+    //比对中序遍历和midchar位置 判断有没有左右子树
+    if(midchar!=s2)  					 //重要！midcghar==s2 代表没有左树
+        node->left=create_node(s1+1,s1+midchar-s2,s2,midchar-1);
+    if(midchar!=e2)   					//重要！midcghar==e2 代表没有右树
+        node->right=create_node(s1+midchar-s2+1,e1,midchar+1,e2);
+    cout<<node->c;
+    return node;
+}
+
+int main()
+{
+    cin>>pre>>mid;
+    int l1=pre.length();
+    int l2=mid.length();
+    loc=0;
+    Node *tree=create_node(0,l1-1,0,l2-1);
+    cout<<endl;
+    return 0;
+}
+
+
+
+
+
+
