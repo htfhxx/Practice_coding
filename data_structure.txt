@@ -31,7 +31,7 @@ struct Node{
     Node *left;
     Node *right;
     char c;
-    Node(){   left=NULL; right=NULL;  }
+    Node(){   left=NULL; right=NULL;  }   //可能占用内存！！！！
 }Tree[50];                              //静态内存分配数组
 int loc;
 
