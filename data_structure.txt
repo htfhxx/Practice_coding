@@ -3,7 +3,7 @@
 //优先级队列   相当于一个自动排序的栈  属于<queue>
 //哈夫曼树的带全路径和即为：所有中间节点的权值和
 priority_queue<int,vector<int>,greater<int> > Q;
-	//T    Container     Compare
+	       //T    Container     Compare
 int n;
 while(cin>>n){
 	for(int i=0;i<n;i++){
