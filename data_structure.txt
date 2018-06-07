@@ -1,11 +1,9 @@
-
-
 //栈和队列
 
 //优先级队列   相当于一个自动排序的栈  属于<queue>
 //哈夫曼树的带全路径和即为：所有中间节点的权值和
 priority_queue<int,vector<int>,greater<int> > Q;
-			//T    Container     Compare
+	//T    Container     Compare
 int n;
 while(cin>>n){
 	for(int i=0;i<n;i++){
@@ -27,8 +25,8 @@ while(cin>>n){
 }
 
 
-//二叉树--通过前序中序遍历得到后序遍历
 
+//二叉树--通过前序中序遍历得到后序遍历
 struct Node{
     Node *left;
     Node *right;
