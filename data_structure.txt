@@ -1,0 +1,26 @@
+
+
+//栈和队列
+
+//优先级队列   相当于一个自动排序的栈  属于<queue>
+//哈夫曼树的带全路径和即为：所有中间节点的权值和
+priority_queue<int,vector<int>,greater<int> > Q;
+int n;
+while(cin>>n){
+	for(int i=0;i<n;i++){
+		int t;   cin>>t;
+		Q.push(t);
+	}
+	int result=0;
+	while(!Q.empty()){
+		int x1=Q.top();
+		Q.pop();
+		if(Q.empty()) break;
+		int x2=Q.top();
+		Q.pop();
+		int x=x1+x2;
+		result+=x;
+		Q.push(x);
+	}
+	cout<<result<<endl;
+}
