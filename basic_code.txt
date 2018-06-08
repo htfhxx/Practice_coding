@@ -13,6 +13,10 @@
   #include <string>
   #include <set>
 
+//字符串操作（string坑太多了，还是老老实实用char吧)。
+char a[9],b[9];
+strcmp(a,b)==0   
+
 //结构体重载运算符  cmp
 struct Student{
     string num;
