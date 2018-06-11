@@ -16,6 +16,7 @@
 //字符串操作（string坑太多了，还是老老实实用char吧)。
 char a[9],b[9];
 strcmp(a,b)==0;  //表示相等  
+memset(a,0,sizeof(a));
 strlen(a);
 sizeof(res)/sizeof(res[0])  //固定数组无法计算（sizeof(a)/sizeof(a[0])=9 ），一般不用。
 
