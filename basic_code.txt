@@ -15,7 +15,9 @@
 
 //字符串操作（string坑太多了，还是老老实实用char吧)。
 char a[9],b[9];
-strcmp(a,b)==0   
+strcmp(a,b)==0;  //表示相等  
+strlen(a);
+sizeof(res)/sizeof(res[0])  //固定数组无法计算（sizeof(a)/sizeof(a[0])=9 ），一般不用。
 
 //结构体重载运算符  cmp
 struct Student{
@@ -50,7 +52,14 @@ for(int i=0;i<m;i++){
     else cout<<l[result].num<<" "<<l[result].name<<" "<<l[result].sex<<" "<<l[result].age<<endl;
 }
 
-//素数筛
+//素数与素数筛
+int check(int n){
+    for(int i=2;i<sqrt(n)+1;i++){
+        if(n%i==0)return 0;
+    }
+    return 1;
+}
+
 const int maxn = 10000;
 int mark[maxn];  //标记
 int prime[maxn];  //存储
