@@ -149,5 +149,41 @@ for(int i=1;i<cnt;i++)a[0]+=a[i];
 printf("%.0lf\n",a[0]);
 
 
+//数制转换
+//十进制转换成b进制--
+char c1[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+char c2[16]={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+int ans[30];
+int cnt=0;
+while(input>0){
+	ans[cnt++]=input%b;
+	input/=b;
+}
+for(int i=cnt-1;i>=0;i--)
+	cout<<c1[ans[i]];  //注意输出不要漏掉>10的数
+cout<<endl;
 
-
+//a进制转换成10进制
+int l=strlen(str);
+long long int result=0;
+for(int i=0;i<l;i++){
+	int x=0;
+	for(int j=0;j<15;j++){
+		if(str[i]==c1[j] || str[i]==c2[j]){
+			x=j;
+			break;
+		}
+	}
+	result*=a;
+	result+=x;
+}
+//不使用遍历的方法
+int l=strlen(str);
+long long int result=0;
+for(int i=0;i<l;i++){
+	result*=a;
+	if(str[i] >= 'a' && str[i] <= 'z') result+= (str[i]-'a'+10);
+	else if(str[i] >= 'A' && str[i] <= 'Z') result+= (str[i]-'A'+10);
+	else if(str[i] >= '0' && str[i] <= '9') result+= (str[i]-'0');
+}
+        
