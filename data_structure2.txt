@@ -1,0 +1,124 @@
+这一篇主要是补充一些数据结构（例如栈和队列、二叉树、图等）相关的常见用法，
+纯手打，并经过了调试，如有错误或者更简便巧妙的用法，欢迎评论区指出，谢谢！~
+
+图论
+//并查集
+int tree[1005];
+int findRoot(int x){
+    if(tree[x]==-1)return x;    //找到根节点，就返回根节点的index
+    else{
+        int tem=findRoot(tree[x]);
+        tree[x]=tem;    //路径压缩--在查找某个特定节点的根节点的同时，
+						将其与根节点之间的所有节点都直接指向根节点
+        return tem;
+    }
+}
+
+int n,m;
+while(cin>>n){
+	if(n==0)break;
+	for(int i=0;i<n;i++)tree[i]=-1;  //根节点初始化，其根为-1
+	cin>>m;
+	for(int i=0;i<m;i++){
+		int a,b;
+		cin>>a>>b;
+		a=findRoot(a);
+		b=findRoot(b);
+		if(a!=b)tree[a]=b;
+	}
+	int cnt=0;
+	for(int i=0;i<n;i++){
+		if(tree[i]==-1)cnt++;
+	}
+	cout<<cnt-1<<endl;
+}
+
+
+//MST 最小生成树   Kruskal算法
+struct Edge{  //保存边
+    int a,b;
+    int cost;
+    bool operator <(const Edge &e)const{
+        return cost<e.cost;
+    }
+}edge[5050];
+
+int findRoot(int x){  //用于查找某条边的两个顶点是否已连接
+    if(tree[x]==-1)return x;
+    else{
+        int tem=findRoot(tree[x]);
+        tree[x]=tem;
+        return tem;
+    }
+}
+
+int main(){
+    int n;
+    while(cin>>n){
+        if(n==0)break;
+        for(int i=0;i<n;i++)tree[i]=-1;  //并查集初始化
+
+        for(int i=0;i<n*(n-1)/2;i++)
+            cin>>edge[i].a>>edge[i].b>>edge[i].cost;
+        sort(edge,edge+n*(n-1)/2);      //排序以方便查找最短路
+
+        int result=0;
+        for(int i=0;i<n*(n-1)/2;i++){   //依次遍历最短路，未连接就连接最短路
+            int a=findRoot(edge[i].a);
+            int b=findRoot(edge[i].b);
+            if(a!=b){
+                tree[a]=b;
+                result+=edge[i].cost;   
+            }
+
+
+        }
+        cout<<result<<endl;
+
+
+
+    }
+    return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
