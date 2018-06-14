@@ -16,8 +16,8 @@
 //字符串操作（string坑太多了，还是老老实实用char吧)。
 char a[9],b[9];
 strcmp(a,b)==0;  //表示相等  
-memset(a,0,sizeof(a));
 strlen(a);
+memset(a,0,sizeof(a));  //有时候会出错，老老实实遍历一遍比较稳
 sizeof(res)/sizeof(res[0])  //固定数组无法计算（sizeof(a)/sizeof(a[0])=9 ），一般不用。
 
 //结构体重载运算符  cmp
@@ -56,21 +56,18 @@ for(int i=0;i<m;i++){
 //素数与素数筛
 int check(int n){
     for(int i=2;i<sqrt(n)+1;i++){
-        if(n%i==0)return 0;
+        if(n%i==0)return 0;  //no
     }
-    return 1;
+    return 1;   //yes
 }
 
 const int maxn = 10000;
 int mark[maxn];  //标记
-int prime[maxn];  //存储
-int primeth=0;
 for(int i = 0; i <= maxn; i++)
         mark[i] = 0;
 for(int i = 2; i <= maxn; i++){
-    if(mark==1) continue;  //跳过
-    prime[primeth++]=i;
-    for(int j=i*i;j<maxn;j++)  //剪枝
+    if(check(i)==0) continue;  //非素数跳过
+    for(int j=i*i;j<maxn;j+=i)  //剪枝--注意+=i
         mark[j]=1;
 }
 
@@ -186,4 +183,20 @@ for(int i=0;i<l;i++){
 	else if(str[i] >= 'A' && str[i] <= 'Z') result+= (str[i]-'A'+10);
 	else if(str[i] >= '0' && str[i] <= '9') result+= (str[i]-'0');
 }
-        
+ 
+
+
+//最大公约数--辗转相除法
+int a,b;
+while(cin>>a){
+	cin>>b;
+	while(b!=0){
+		int tem=a%b;
+		a=b;
+		b=tem;
+	}
+	cout<<a<<endl;
+} 
+
+
+//高精度整数--占坑（还不会）
