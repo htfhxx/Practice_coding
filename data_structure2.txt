@@ -36,7 +36,8 @@ while(cin>>n){
 
 //MST 最小生成树   Kruskal算法
 struct Edge{  //保存边
-    int a,b;
+    int a,b;    //如果有point结构体的话，
+				//建议保存point数组的地址i，而不是整个对象p[i]
     int cost;
     bool operator <(const Edge &e)const{
         return cost<e.cost;
@@ -83,7 +84,31 @@ int main(){
 }
 
 
+//最短路径  floyd
 
+for(int i=0;i<n;i++){  //初始化邻接矩阵
+	for(int j=0;j<n;j++){
+		ans[i][j]=-1;
+	}
+	ans[i][i]=0;
+}
+for(int i=0;i<m;i++){   //读入各边权值
+	int a,b;
+	cin>>a>>b;
+	ans[a][b]=ans[b][a]=((int)pow(2,i))%100000;  //双向！！！
+}
+
+for(int k=0;k<n;k++){
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			if(ans[i][k]==-1 || ans[k][j]==-1)continue;    //不更新
+			if(ans[i][j]==-1 || ans[i][k]+ans[k][j]<ans[i][j]){  //更新
+				ans[j][i]=ans[i][j]=ans[i][k]+ans[k][j]; 
+			}
+		}
+
+	}
+}
 
 
 
