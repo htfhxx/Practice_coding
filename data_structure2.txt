@@ -84,7 +84,8 @@ int main(){
 }
 
 
-//最短路径  floyd   O(N^3) N<200适用
+//最短路径  floyd   基于邻接矩阵
+// O(N^3) N<200适用  可求出任意节点对之间距离
 
 for(int i=0;i<n;i++){  //初始化邻接矩阵
 	for(int j=0;j<n;j++){
@@ -112,9 +113,85 @@ for(int k=0;k<n;k++){
 
 
 
+//最短路 Dijstra  基于邻接链表
+// O(N^2)  可求某固定节点到任意节点的距离
+struct Edge{
+    int next;  //邻接链表的邻接节点
+    int cost;
+    int distance;
+};
+vector <Edge> edge[100005];
+int dis[1005];
+int cost[1005];
+bool mark[1005];
 
+int main(){
+    int n,m;
+    while(cin>>n){
+        cin>>m;
+        if(m==0 &&n==0)break;
 
+        for(int i=1;i<=n;i++)edge[i].clear();  //一定要记得清空
 
+        for(int i=0;i<m;i++){
+            int start,tail;
+            cin>>start>>tail;
+            Edge tem;
+            cin>>tem.distance>>tem.cost;
+            tem.next=tail;
+            edge[start].push_back(tem);
+            tem.next=start;
+            edge[tail].push_back(tem);    //双向的输入
+        }
+
+        int start,tail;
+        cin>>start>>tail;
+
+        for(int i=1;i<=n;i++){       初始化数组，距离设为-1
+            dis[i]=-1;
+            cost[i]=-1;
+            mark[i]=false;
+        }
+
+        dis[start]=0;
+        cost[start]=0;
+        mark[start]=true;  
+        int newP=start;            //选取起点作为第一个点
+		
+        for(int i=1;i<n;i++){      //遍历n-1次，因为已经选取了一个点
+			
+			//主要是更新选定的点到其他节点的距离
+            for(int j=0;j<edge[newP].size();j++){
+                int get=edge[newP][j].next;
+                int d=edge[newP][j].distance;
+                int c=edge[newP][j].cost;
+                if(mark[get]==true)continue;     //跳过已经选取过的点
+                if(dis[get]==-1 || dis[get]>dis[newP]+d     //更新距离
+                   ||dis[get]== dis[newP]+d && cost[get]>cost[newP]+c){
+                        dis[get]=dis[newP]+d;
+                        cost[get]=cost[newP]+c;
+                        //cout<<"++++"<<endl;
+                }
+            }
+			//找到下一个选定的点-->到其他节点的距离最近
+            int mind=123123123;
+            for(int j=1;j<=n;j++){
+                if(mark[j]==true)continue;
+                if(dis[j]==-1)continue;  //考虑无穷大距离的可能
+                if(dis[j]<mind){
+                    newP=j;
+                    mind=dis[j];
+                }
+            }
+            mark[newP]=true;
+
+        }
+        cout<<dis[tail]<<" "<<cost[tail]<<endl;
+		
+    }
+    return 0;
+
+}
 
 
 
