@@ -9,7 +9,6 @@ bool mark[50][50][50];  //访问标记
 struct N{
     int x,y,z;
     int t;   //统计器
-
 };
 queue <N> Q;  //存储广度得到的状态
 
@@ -75,6 +74,57 @@ int main(){
 
         if(result<=t)cout<<result<<endl;
         else cout<<-1<<endl;
+    }
+    return 0;
+}
+
+
+
+//DFS  通常用递归的方式深度遍历，不再寻求最优解
+
+char info[10][10];  //存储矩阵内容
+bool success;     //最终结果，初始化为false
+int n,m,t;
+int go[][2]={1,0,-1,0,0,1,0,-1};
+
+void DFS(int x,int y,int time){
+    for(int i=0;i<4;i++){    
+        int nx=x+go[i][0];
+        int ny=y+go[i][1];
+		//剪枝，很重要！！！
+        if( nx<0 || nx>=n  || ny<0 ||ny>=m) continue;
+        if(info[nx][ny]=='X')continue;
+		
+        if(info[nx][ny]=='D'){  //找到终点
+            if(time+1==t){      //符合条件就终止
+                success=true;   
+                return;
+            }
+            else continue;
+        }
+        info[nx][ny]='X';    //访问过的标记为墙
+        DFS(nx,ny,time+1);   //继续下一层访问
+        info[nx][ny]='.';    下一层访问完毕后，恢复为非墙，方便其他状态深度遍历
+        if(success)return;   //防止下一层返回时继续遍历
+    }
+}
+int main(){
+    while(cin>>n>>m>>t){
+        if(n==0 && m==0 && t==0)break;
+        int sx,sy;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                cin>>info[i][j];
+                if(info[i][j]=='S'){  //找到起点
+                    sx=i;
+                    sy=j;
+                }
+            }
+        }
+        success=false;  //初始化标记
+        DFS(sx,sy,0);   //开始深度遍历
+        if(success==true)cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
     }
     return 0;
 }
