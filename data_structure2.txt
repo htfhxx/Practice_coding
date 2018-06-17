@@ -84,7 +84,7 @@ int main(){
 }
 
 
-//最短路径  floyd
+//最短路径  floyd   O(N^3) N<200适用
 
 for(int i=0;i<n;i++){  //初始化邻接矩阵
 	for(int j=0;j<n;j++){
