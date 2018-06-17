@@ -71,16 +71,10 @@ int main(){
                 tree[a]=b;
                 result+=edge[i].cost;   
             }
-
-
         }
         cout<<result<<endl;
-
-
-
     }
     return 0;
-
 }
 
 
@@ -107,7 +101,6 @@ for(int k=0;k<n;k++){
 				ans[j][i]=ans[i][j]=ans[i][k]+ans[k][j]; 
 			}
 		}
-
 	}
 }
 
