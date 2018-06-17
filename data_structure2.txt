@@ -120,6 +120,7 @@ struct Edge{
     int cost;
     int distance;
 };
+
 vector <Edge> edge[100005];
 int dis[1005];
 int cost[1005];
@@ -130,9 +131,16 @@ int main(){
     while(cin>>n){
         cin>>m;
         if(m==0 &&n==0)break;
-
+		
+		//1-初始化过程
         for(int i=1;i<=n;i++)edge[i].clear();  //一定要记得清空
-
+        for(int i=1;i<=n;i++){       //初始化数组，距离设为-1
+            dis[i]=-1;
+            cost[i]=-1;
+            mark[i]=false;
+        }
+		
+		//2-构建临界矩阵
         for(int i=0;i<m;i++){
             int start,tail;
             cin>>start>>tail;
@@ -147,12 +155,7 @@ int main(){
         int start,tail;
         cin>>start>>tail;
 
-        for(int i=1;i<=n;i++){       初始化数组，距离设为-1
-            dis[i]=-1;
-            cost[i]=-1;
-            mark[i]=false;
-        }
-
+		//3-选取起点开始寻找最短路径的第二个节点
         dis[start]=0;
         cost[start]=0;
         mark[start]=true;  
@@ -160,7 +163,7 @@ int main(){
 		
         for(int i=1;i<n;i++){      //遍历n-1次，因为已经选取了一个点
 			
-			//主要是更新选定的点到其他节点的距离
+			//3.1-主要是更新选定的点到其他节点的距离
             for(int j=0;j<edge[newP].size();j++){
                 int get=edge[newP][j].next;
                 int d=edge[newP][j].distance;
@@ -173,13 +176,13 @@ int main(){
                         //cout<<"++++"<<endl;
                 }
             }
-			//找到下一个选定的点-->到其他节点的距离最近
+			//3.2-找到下一个选定的点-->到其他节点的距离最近
             int mind=123123123;
             for(int j=1;j<=n;j++){
                 if(mark[j]==true)continue;
                 if(dis[j]==-1)continue;  //考虑无穷大距离的可能
                 if(dis[j]<mind){
-                    newP=j;
+                    newP=j;     //选定节点
                     mind=dis[j];
                 }
             }
@@ -193,7 +196,54 @@ int main(){
 
 }
 
+//判断DAG有向无环图
+vector<int> edge[105];
+int rudu[105];
+queue <int> Q;
+int main(){
+    int n,m;
+    while(cin>>n){
+        cin>>m;
+        if(n==0 && m==0)break;
+		
+		//初始化
+        for(int i=0;i<n;i++){
+            rudu[i]=0;
+            edge[i].clear();
+        }
+        while(Q.empty()==false)Q.pop();
 
+		//输入，构建邻接链表
+        for(int i=0;i<m;i++){
+            int s,t;
+            cin>>s>>t;
+            edge[s].push_back(t);
+            rudu[t]++;
+        }
+
+		//队列存放入度为0的节点
+        for(int i=0;i<n;i++){
+            if(rudu[i]==0)Q.push(i);
+        }
+		
+		删除入度为0节点
+        int cnt=0;
+        while(Q.empty()==false){
+            int tem=Q.front();
+            Q.pop();
+            cnt++;
+            for(int i=0;i<edge[tem].size();i++){
+                rudu[edge[tem][i]]--;
+                if(rudu[edge[tem][i]]==0)
+                    Q.push(edge[tem][i]);
+            }
+        }
+        if(cnt==n)cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+    return 0;
+
+}
 
 
 
