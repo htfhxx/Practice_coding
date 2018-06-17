@@ -1,0 +1,138 @@
+这一篇主要是补充一些数据结构（例如BFS、DFS等）相关的常见用法，
+纯手打，并经过了调试，如有错误或者更简便巧妙的用法，欢迎评论区指出，谢谢！~
+
+//搜索&查找
+//BFS  通常用队列FIFO实现
+int aa[50][50][50];  //存储矩阵内容
+bool mark[50][50][50];  //访问标记
+//矩阵单元 t:时间
+struct N{
+    int x,y,z;
+    int t;   //统计器
+
+};
+queue <N> Q;  //存储广度得到的状态
+
+int go[][3]={
+    1,0,0,
+    -1,0,0,
+    0,1,0,
+    0,-1,0,
+    0,0,1,
+    0,0,-1
+};
+int BFS(int a,int b,int c){
+    while(Q.empty()==false){  //每一次广度遍历得到的状态放入队列中
+        N now=Q.front();      //取出本状态，再去求得此状态延伸下的其他状态
+        Q.pop();
+        for(int i=0;i<6;i++){
+            int nx=now.x+go[i][0];
+            int ny=now.y+go[i][1];
+            int nz=now.z+go[i][2];
+			
+			//剪枝的过程，至关重要
+            if(nx<0 || ny<0 ||nz<0 || nx>=a || ny>=b || nz>=c)continue;
+            if(mark[nx][ny][nz]==true) continue;
+            if( aa[nx][ny][nz]==1 )continue;
+
+            //新的状态
+            N tem;
+            tem.x=nx;
+            tem.y=ny;
+            tem.z=nz;
+            tem.t=now.t+1;
+            Q.push(tem);    //得到的新状态放入队列中
+            mark[nx][ny][nz]=true;    //一定要记得断了后路！！！
+            if(nx==a-1 && ny==b-1 && nz==c-1)return tem.t;   //程序出口！
+        }
+    }
+    return -1;    //最终所有状态都遍历完仍然没有结果就返回-1
+}
+
+int main(){
+    int K;
+    cin>>K;
+    while(K--){
+        int a,b,c,t;
+        cin>>a>>b>>c>>t;
+        for(int i=0;i<a;i++){
+            for(int j=0;j<b;j++){
+                for(int k=0;k<c;k++){
+                    cin>>aa[i][j][k];
+                    mark[i][j][k]=false;  //初始化mark标记
+                }
+            }
+        }
+        while(Q.empty()==false)Q.pop();  //清空队列
+		
+        mark[0][0][0]=true;     //起点的初始化
+        N tem;
+        tem.x=tem.y=tem.z=tem.t=0;
+
+        Q.push(tem);
+        int result=BFS(a,b,c);    //广度遍历开始
+
+
+        if(result<=t)cout<<result<<endl;
+        else cout<<-1<<endl;
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
