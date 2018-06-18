@@ -1,0 +1,73 @@
+这一篇主要是补充一些动态规划（例如子序列相关、基础状态转移模板题等）相关的常见用法，
+纯手打，并经过了调试，如有错误或者更简便巧妙的用法，欢迎评论区指出，谢谢！~
+
+
+
+//最长递增子序列
+int aa[50];
+int dp[50];   //表示以index=i为结尾的递增子序列的长度     important！！
+dp[0]=1;  //对index=0初始化
+for(int i=0;i<k;i++){
+	cin>>aa[i];
+}
+for(int i=1;i<k;i++){  //从index=1开始规划
+	int maxN=0;
+	for(int j=0;j<=i;j++){   //遍历之前的数组
+		if(aa[j]<=aa[i]){    //满足递增规律-->状态转换
+			maxN=max(maxN,dp[j]+1);    //选取最合适的状态
+		}
+	}
+	dp[i]=maxN;              //对当前index进行规划
+}
+
+int maxN=0;
+for(int i=0;i<k;i++){       //找到最大递增子序列
+	maxN=max(maxN,dp[i]); 
+}
+cout<<maxN<<endl;
+
+8
+300 207 155 300 299 170 158 65
+1 1 1 2 2 2 2 1
+2
+
+
+//最长公共字串
+int dp[105][105];  //前i个字符和前j个字符的公共子序列  important！！
+char a[105];
+char b[105];
+for(int i=0;i<strlen(a);i++)   //初始状态
+	dp[i][0]=0;
+for(int i=0;i<strlen(b);i++)
+	dp[0][i]=0;
+
+for(int i=1;i<=strlen(a);i++){  //注意从1开始，从strlen(a)结束，前i个
+	for(int j=1;j<=strlen(b);j++){
+		if(a[i-1]==b[j-1])dp[i][j]=dp[i-1][j-1]+1;
+		else {
+			dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+		}
+	}
+}
+
+cout<<dp[strlen(a)][strlen(b)]<<endl;  //最终输出的是dp[L1][L2]，而不是dp[L1-1][L2-1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
