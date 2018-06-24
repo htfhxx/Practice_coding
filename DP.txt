@@ -1,7 +1,10 @@
 这一篇主要是补充一些动态规划（例如子序列相关、基础状态转移模板题等）相关的常见用法，
 纯手打，并经过了调试，如有错误或者更简便巧妙的用法，欢迎评论区指出，谢谢！~
 
-
+一般动态规划问题，自己的总结，分三步：
+1. 划分子问题：dp[i][j]=x  其中i是改变量，j是限定条件（可省），x是要求的结果
+2. 找到初始状态，一般是dp[0][j]=0    并且
+3. 找到状态转移公式，dp[i][j]=dp[i-1][j]  dp[i][j]=max(...)
 
 //最长递增子序列
 int aa[50];
@@ -54,7 +57,39 @@ cout<<dp[strlen(a)][strlen(b)]<<endl;  //最终输出的是dp[L1][L2]，而不�
 
 
 
+//0-1背包问题
+//给定允许采摘的最长时间T，药数M,各药的采摘时间和价值，求最大价值。
+//0-1背包有个变化，将最长时间T改为，恰好为T---->这种情况只需要改变初始状态即可，状态转移不变
 
+https://www.nowcoder.com/practice/d7c03b114f0541dd8e32ce9987326c16?tpId=40&tqId=21406&tPage=1&rp=1&ru=/ta/kaoyan&qru=/ta/kaoyan/question-ranking
+
+struct Med{
+    int t;
+    int v;
+}med[105];
+
+int dp[105][1005]; //dp[i][j]=x
+				   //i代表采摘前i株，j代表限制时间为j，x代表采摘到的价值
+int main(){
+    int T,M;
+    while(cin>>T){
+        cin>>M;
+        for(int i=1;i<=M;i++)     //建议从1开始
+            cin>>med[i].t>>med[i].v;
+
+        for(int i=0;i<M;i++)
+            dp[0][i]=0;
+
+        for(int i=1;i<=M;i++){ 
+            for(int j=0;j<med[i].t;j++)     //选择此株时不满足采摘条件（t不够）
+                dp[i][j]=dp[i-1][j];
+            for(int j=med[i].t;j<=T;j++){   //选择此株时采摘or不采摘第i株
+                dp[i][j]=max( dp[i-1][j], dp[i-1][j-med[i].t]+med[i].v);
+            }
+        }
+        cout<<dp[M][T]<<endl;
+    }
+}
 
 
 
