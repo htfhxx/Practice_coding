@@ -11,7 +11,10 @@ memset(a,0,sizeof(a));
 
 #include<vector>
 ```
-vector<int> v;    vector<vector<int>> v;
+vector<int> v;  
+vector<int> mem(n+1,-1);
+
+vector<vector<int>> v;
 v.size();    v[0].size();
 v.empty();  
 v.push_back(x);
@@ -42,6 +45,7 @@ s.pop();
 #include<map>
 ```
 map<int,int> m;
+m.count(val)==0?
 m[a]=b;
 ```
 
