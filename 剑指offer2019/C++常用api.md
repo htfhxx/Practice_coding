@@ -1,12 +1,18 @@
+
+
 arrary
 ```
 int number[];
+swap(number[i],number[j]);
 ```
 
 #include<string>
 ```
 memset(a,0,sizeof(a));
-
+str.size();
+str.length();
+str.begin();
+str.end();
 ```
 
 #include<vector>
@@ -18,7 +24,9 @@ vector<vector<int>> v;
 v.size();    v[0].size();
 v.empty();  
 v.push_back(x);
+v.clear(); //清空元素，但不回收空间
 
+swap(v[i],v[j]);
 sort(result.begin(),result.end());  //排列
 ```
 
@@ -35,10 +43,30 @@ s.pop();
 #include<queue>
 ```
 queue<int> q;
-s.push(value);
-q.empty();
 q.push(value);
+q.empty();
 q.front();
+s.pop();
+```
+#include<list>
+```
+list<int> l;
+l.begin();
+l.end();
+l.size();
+list<int>::iterator current=l.begin();
+l.erase(current);
+l.push_back(val);
+
+```
+
+#include<deque>
+```
+deque<int> q;
+q.push_back(value);
+q.empty();
+q.front();
+q.back();
 s.pop();
 ```
 
