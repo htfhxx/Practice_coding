@@ -1,5 +1,3 @@
-
-
 arrary
 ```
 int number[];
@@ -9,16 +7,14 @@ swap(number[i],number[j]);
 #include<string>
 ```
 memset(a,0,sizeof(a));
-str.size();
-str.length();
-str.begin();
-str.end();
+str.size();  str.length();
+str.begin();   str.end();
 ```
 
 #include<vector>
 ```
 vector<int> v;  
-vector<int> mem(n+1,-1);
+vector<int> mem(n+1,-1); //n+1个数，初始化-1
 
 vector<vector<int>> v;
 v.size();    v[0].size();
@@ -36,10 +32,10 @@ sort(result.begin(),result.end());  //排列
 stack<int> s;
 s.push(value);
 s.empty();
-s.push(value);
 s.top();
 s.pop();
 ```
+
 #include<queue>
 ```
 queue<int> q;
@@ -48,16 +44,15 @@ q.empty();
 q.front();
 s.pop();
 ```
+
 #include<list>
 ```
 list<int> l;
-l.begin();
-l.end();
+l.begin();  l.end();
 l.size();
 list<int>::iterator current=l.begin();
 l.erase(current);
 l.push_back(val);
-
 ```
 
 #include<deque>
@@ -83,7 +78,7 @@ fabs(number); //绝对值
 sqt(number); //开方
 ```
 
-#include<multiset>
+#include<multiset>  //自动排序的set
 ```
 multiset<int, greater<int> > leastNums;  //从大到小排序
 
