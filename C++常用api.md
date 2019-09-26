@@ -15,6 +15,8 @@ str.begin();   str.end();
 ```
 vector<int> v;  
 vector<int> mem(n+1,-1); //n+1个数，初始化-1
+vector<int>({1,2,3,4});//直接加入元素
+vector<int>(); //返回一个空的容器
 
 vector<vector<int>> v;
 v.size();    v[0].size();
@@ -45,6 +47,13 @@ q.front();
 s.pop();
 ```
 
+
+#include<map>
+```
+map<int,int> m;
+m.count(val)==0?
+m[a]=b;
+```
 #include<list>
 ```
 list<int> l;
@@ -65,12 +74,7 @@ q.back();
 s.pop();
 ```
 
-#include<map>
-```
-map<int,int> m;
-m.count(val)==0?
-m[a]=b;
-```
+
 
 #include<math>
 ```
