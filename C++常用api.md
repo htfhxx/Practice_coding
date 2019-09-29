@@ -1,6 +1,7 @@
 arrary
 ```
 int number[];
+int dp[n][n]={0};
 swap(number[i],number[j]);
 ```
 
@@ -9,12 +10,14 @@ swap(number[i],number[j]);
 memset(a,0,sizeof(a));
 str.size();  str.length();
 str.begin();   str.end();
+string subS=str.substr(begin,length);
 ```
 
 #include<vector>
 ```
 vector<int> v;  
-vector<int> mem(n+1,-1); //n+1个数，初始化-1
+vector<int> v(n+1,-1); //n+1个数，初始化-1
+vector<vector<int>> v(n,vector<int>(n,0));
 vector<int>({1,2,3,4});//直接加入元素
 vector<int>(); //返回一个空的容器
 
