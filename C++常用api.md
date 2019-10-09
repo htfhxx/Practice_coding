@@ -5,12 +5,18 @@ int dp[n][n]={0};
 swap(number[i],number[j]);
 ```
 
+#include<algorithm>
+```
+sort(array,array+length);     //0-(length-1)数组排序
+bool cmp(const int &a,const int &b) return a>b;   //没有官方封装的快
+sort(array,array+length,cmp);  //0-(length-1)数组排序-降序
+```
+
 #include<string>
 ```
-memset(a,0,sizeof(a));
 str.size();  str.length();
-str.begin();   str.end();
-string subS=str.substr(begin,length);
+memset(a,0,sizeof(a));
+string subS=str.substr(begin_index,length_index);
 ```
 
 #include<vector>
@@ -35,8 +41,8 @@ sort(result.begin(),result.end());  //排列
 #include<stack>
 ```
 stack<int> s;
-s.push(value);
 s.empty();
+s.push(value);
 s.top();
 s.pop();
 ```
@@ -44,8 +50,8 @@ s.pop();
 #include<queue>
 ```
 queue<int> q;
-q.push(value);
 q.empty();
+q.push(value);
 q.front();
 s.pop();
 ```
@@ -54,8 +60,17 @@ s.pop();
 #include<map>
 ```
 map<int,int> m;
+m[key]=val;
 m.count(val)==0?
-m[a]=b;
+m.erase(key);   m.erase(iter);
+
+map<int, int>::iterator iter=m.begin();
+while(iter != m.end()) {
+    cout << iter->first << " : " << iter->second << endl;
+    iter++;
+}
+//map中的元素按照key顺序排列，在对顺序有要求的问题中使用map，查找速度上慢于哈希实现的unordered_map
+
 ```
 #include<list>
 ```
@@ -67,7 +82,7 @@ l.erase(current);
 l.push_back(val);
 ```
 
-#include<deque>
+#include<deque>  //双向队列
 ```
 deque<int> q;
 q.push_back(value);
@@ -97,15 +112,7 @@ result=vector<int> (leastNumbers.begin(),leastNumbers.end());
 ```
 
 
-#include<algorithm>
-```
 
-sort(array,array+length);     //0-(length-1)数组排序
-(find(result.begin(),result.end(),str) == result.end()  )  //判断vector中是否包含str
-
-bool cmp(const int &a,const int &b) return a>b;   //没有官方封装的快
-sort(array,array+length,cmp);  //0-(length-1)数组排序-降序
-```
 
 
 
