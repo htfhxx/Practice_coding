@@ -98,8 +98,42 @@ public:
         }
     }
 };
+```
 
 
+不超内存的写法   值得借鉴
+```
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root==NULL || p==NULL || q==NULL)
+            return NULL;
+        vector<TreeNode*> path1;
+        vector<TreeNode*> path2;
+        dfs(root,p,path1);
+        dfs(root,q,path2);
+        reverse(path1.begin(),path1.end());  //翻转的原因是两者长度不一样，例如要寻找K  从root到leaves: ABCDE 和 ABCTGK
+        reverse(path2.begin(),path2.end());
+        for(int i=min(path1.size(),path2.size())-1;i>=0;i--){
+            if(path1[i]==path2[i])
+                return path1[i];
+        }
+        return NULL;
+    }
+    bool dfs(TreeNode * root,TreeNode * p,vector<TreeNode *>& path){
+        if(root==NULL)
+            return false;
+        if(root==p){
+            path.push_back(root);
+            return true;
+        }
+        if(dfs(root->left,p,path) || dfs(root->right,p,path) ){
+            path.push_back(root);
+            return true;
+        }
+        return false;
+    }
+};
 ```
 
 
