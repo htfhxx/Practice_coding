@@ -24,7 +24,7 @@ https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 
 ##### 代码思路
 
-
+参考易用写法中的二分写法
 
 
 ##### 代码实现
@@ -39,25 +39,24 @@ class Solution {
 public:
     int findMin(vector<int>& nums) {
         if(nums.empty()==true)
-            return 0;
+            return -1;
         if(nums.size()==1)
             return nums[0];
         int left=0,right=nums.size()-1;
         if(nums[left]<nums[right])
             return nums[left];
-        while(left<=right){
-            int middle=(left+right)/2;
-            if(middle>0 && nums[middle]<nums[middle-1])  //判断临界条件  middle==0的情况在上面排除了
-                return nums[middle];
-            if(nums[middle]>=nums[0])  //判断在左边还是右边
+        while(left<right){
+            int middle=left+(right-left)/2;
+            if(nums[middle]>=nums[0])  //注意临界
                 left=middle+1;
-            else
-                right=middle-1;
+            else 
+                right=middle;
         }
+        if(left>=1 && nums[left]<=nums[left-1])
+            return nums[left];
         return -1;
     }
 };
 
-
-
 ```
+
