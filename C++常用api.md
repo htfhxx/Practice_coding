@@ -17,7 +17,7 @@ sort(array,array+length,cmp);  //0-(length-1)数组排序-降序
 
 #include<math>
 ```
-fabs(number); //绝对值
+fabs(number); //绝对值,abs只针对整数
 sqt(number); //开方
 ```
 
@@ -71,8 +71,6 @@ s.pop();
 ```
 map<int,int> m;   //初始化
 m[key]=val;     //赋值
-m.count(val)==0?    //判断value是否存在
-
 m.erase(key);   m.erase(iter);   //去掉-key或指针
 
 for(auto iter=m.begin();iter!=m.end();iter++){
